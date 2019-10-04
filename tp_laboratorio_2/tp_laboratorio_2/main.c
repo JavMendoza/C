@@ -157,3 +157,193 @@ void mostrarInformes(eEmpleado empleados[], int tam)
     }
     while(salir != 's');
 }
+
+int buscarLibre(eEmpleado vec[], int tam)
+{
+    int indice = -1;
+
+    for(int i=0; i < tam; i++)
+    {
+        if( vec[i].isEmpty == 1 )
+        {
+            indice = i;
+            break;
+        }
+    }
+    return indice;
+}
+
+int altaEmpleado(eEmpleado vec[], int tam, int leg)
+{
+    int todoOk = 0;
+    int indice;
+    char nombre[20];
+    char sexo;
+    int edad;
+    int n1;
+    int n2;
+    int idCarrera;
+    eFecha fecha;
+
+    //system("cls");
+
+    printf("*****Alta Empleado*****\n\n");
+
+    indice = buscarLibre(vec, tam);
+
+    if( indice == -1)
+    {
+        printf("\nSistema completo\n\n");
+    }
+    else
+    {
+        printf("Ingrese nombre: ");
+        fflush(stdin);
+        gets(nombre);
+
+        printf("Ingrese edad: ");
+        scanf("%d", &edad);
+
+        printf("Ingrese sexo: ");
+        fflush(stdin);
+        scanf("%c", &sexo);
+
+        printf("Ingrese nota 1: ");
+        scanf("%d", &n1);
+
+        printf("Ingrese nota 2: ");
+        scanf("%d", &n2);
+
+        printf("Ingrese fecha ingreso: ");
+        scanf("%d/%d/%d", &fecha.dia, &fecha.mes, &fecha.anio);
+
+        mostrarCarreras(carreras, tamC);
+        printf("Ingrese id carrera: ");
+        scanf("%d", &idCarrera);
+
+        vec[indice] = newAlumno(leg, nombre, edad, sexo, n1, n2, fecha, idCarrera);
+        todoOk = 1;
+        printf("Alta exitosa!!\n\n");
+    }
+
+    return todoOk;
+}
+
+eAlumno newAlumno(
+    int leg,
+    char nombre[],
+    int edad,
+    char sexo,
+    int nota1,
+    int nota2,
+    eFecha fecha,
+    int idCarrera
+)
+{
+
+    eAlumno al;
+    al.legajo = leg;
+    strcpy( al.nombre, nombre);
+    al.sexo = sexo;
+    al.edad = edad;
+    al.nota1 = nota1;
+    al.nota2 = nota2;
+    al.promedio = (float) (nota1 + nota2 )/2;
+    al.fechaIngreso = fecha;
+    al.idCarrera = idCarrera;
+    al.isEmpty = 0;
+
+    return al;
+}
+
+int bajaAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC)
+{
+    int todoOk = 0;
+    int legajo;
+    int indice;
+    char confirma;
+    system("cls");
+    printf("***** Baja Alumno *****\n\n");
+    printf("Ingrese legajo: ");
+    scanf("%d", &legajo);
+
+    indice = buscarAlumno(legajo, vec, tam);
+
+    if( indice == -1)
+    {
+        printf("No existe un alumno con ese legajo\n\n");
+
+    }
+    else
+    {
+        mostrarAlumno(vec[indice], carreras, tamC);
+
+        printf("\nConfirma baja?");
+        fflush(stdin);
+        scanf("%c", &confirma);
+
+        if( confirma == 's')
+        {
+            vec[indice].isEmpty = 1;
+            todoOk = 1;
+            printf("Baja exitosa!!!");
+        }
+        else
+        {
+            printf("Se ha cancelado la operacion");
+        }
+    }
+
+    return todoOk;
+}
+
+int ModificarAlumno(eAlumno vec[], int tam, eCarrera carreras[], int tamC)
+{
+
+    int todoOk = 0;
+    int legajo;
+    int indice;
+    system("cls");
+    printf("***** Modificar Alumno *****\n\n");
+    printf("Ingrese legajo: ");
+    scanf("%d", &legajo);
+    int opcion;
+
+    indice = buscarAlumno(legajo, vec, tam);
+
+    if( indice == -1)
+    {
+        printf("No existe un alumno con ese legajo\n\n");
+
+    }
+    else
+    {
+
+        mostrarAlumno(vec[indice], carreras, tamC);
+
+        printf("1- Modificar nota1\n");
+        printf("2- Modificar nota2\n");
+        printf("3- Salir\n\n");
+        printf("Ingrese opcion: ");
+        scanf("%d", &opcion);
+        switch(opcion)
+        {
+        case 1:
+            printf("Ingrese nueva nota: ");
+            scanf("%d", &vec[indice].nota1);
+            vec[indice].promedio = (float) (vec[indice].nota1  + vec[indice].nota2)/2;
+            break;
+
+        case 2:
+            printf("Ingrese nueva nota: ");
+            scanf("%d", &vec[indice].nota2);
+            vec[indice].promedio = (float) (vec[indice].nota1  + vec[indice].nota2)/2;
+            break;
+        case 3:
+            printf("Se ha cancelado la mofdificacion ");
+            break;
+
+        }
+    }
+    return todoOk;
+}
