@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1570218467 source:/Users/jmendoza/UTN/C/tp_laboratorio_2/tp_laboratorio_2/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
