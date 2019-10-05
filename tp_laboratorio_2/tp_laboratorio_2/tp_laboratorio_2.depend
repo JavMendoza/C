@@ -4,3 +4,17 @@
 	<stdlib.h>
 	<string.h>
 
+1570241927 source:d:\workspace\c\tp_laboratorio_2\tp_laboratorio_2\arrayemployees.c
+	"ArrayEmployees.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1570243382 d:\workspace\c\tp_laboratorio_2\tp_laboratorio_2\arrayemployees.h
+
+1570243661 source:d:\workspace\c\tp_laboratorio_2\tp_laboratorio_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayEmployees.h"
+
